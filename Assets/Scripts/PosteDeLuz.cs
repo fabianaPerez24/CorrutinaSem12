@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class PosteDeLuz : MonoBehaviour
 {
-    public bool luces = false;
+    private SpriteRenderer poste;
 
     // Start is called before the first frame update
     void Start()
     {
+        poste = GetComponent<SpriteRenderer>();
         StartCoroutine(LucesParpadeo());
     }
 
-    IEnumerator LucesParpadeo ()
+    IEnumerator LucesParpadeo()
     {
         while(true)
-        { 
-            luces=false;
+        {
+            poste.color = Color.grey;
            yield return new WaitForSeconds(2);
-            luces =true;
+            poste.color = Color.white;
             yield return new WaitForSeconds(3);
+            for(int i = 0; i < 7; i++) 
+            {
+                poste.color = Color.white;
+                yield return new WaitForSeconds(0.1f);
+                poste.color = Color.grey;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
 
     }
